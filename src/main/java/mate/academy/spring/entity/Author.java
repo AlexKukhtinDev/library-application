@@ -1,5 +1,6 @@
 package mate.academy.spring.entity;
 
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "authors")
@@ -28,11 +28,11 @@ public class Author {
     @ManyToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @JoinTable(name = "authors_books",
-            joinColumns = @JoinColumn(name = "author_id",referencedColumnName = "author_id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id",referencedColumnName = "book_id"))
-    private List<Book>books;
+            joinColumns = @JoinColumn(name = "author_id", referencedColumnName = "author_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "book_id"))
+    private List<Book> books;
 
-    public Author(){
+    public Author() {
 
     }
 

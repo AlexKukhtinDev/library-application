@@ -1,12 +1,11 @@
 package mate.academy.spring.dao;
 
+import java.util.List;
+import javax.persistence.TypedQuery;
 import mate.academy.spring.entity.Book;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.TypedQuery;
-import java.util.List;
 
 @Repository
 public class BookDaoImpl implements BookDao {
@@ -16,7 +15,7 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public void add(Book book) {
-    sessionFactory.getCurrentSession().save(book);
+        sessionFactory.getCurrentSession().save(book);
     }
 
     @Override

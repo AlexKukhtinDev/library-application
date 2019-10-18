@@ -1,5 +1,7 @@
 package mate.academy.spring.entity;
 
+import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -28,19 +27,20 @@ public class Book {
     @ManyToMany(cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @JoinTable(name = "authors_books",
-    joinColumns = @JoinColumn(name = "book_id",referencedColumnName = "book_id"),
-    inverseJoinColumns = @JoinColumn(name = "author_id",referencedColumnName = "author_id"))
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "book_id"),
+            inverseJoinColumns =
+            @JoinColumn(name = "author_id", referencedColumnName = "author_id"))
     private List<Author> authors;
     @Column(name = "year")
     private int year;
     @Column(name = "price")
     private BigDecimal price;
 
-    public Book(){
+    public Book() {
 
     }
 
-    public Book(String title, int year,BigDecimal price) {
+    public Book(String title, int year, BigDecimal price) {
         this.title = title;
         this.year = year;
         this.price = price;

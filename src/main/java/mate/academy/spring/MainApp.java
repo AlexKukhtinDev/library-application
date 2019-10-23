@@ -21,37 +21,29 @@ public class MainApp {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(AppConfig.class);
 
-        Book book1 = new Book("PIU PIU", 2019, 121212D, new ArrayList<>());
-        Book book2 = new Book("Wiu Wui", 2019, 140D, new ArrayList<>());
-        Book book3 = new Book("ShikSki", 2019, 500D, new ArrayList<>());
+        Book piu_piu = new Book("PIU PIU", 2019, 121212D, new ArrayList<>());
+        Book wiu_wui = new Book("Wiu Wui", 2019, 140D, new ArrayList<>());
+        Book shikSki = new Book("ShikSki", 2019, 500D, new ArrayList<>());
 
-        Author author1 = new Author("Stepan", "Beep", new ArrayList<>());
-        Author author2 = new Author("Gorik", "Omar", new ArrayList<>());
+        Author stepanBeep = new Author("Stepan", "Beep", new ArrayList<>());
+        Author gorikOmar = new Author("Gorik", "Omar", new ArrayList<>());
 
-        book1.getAuthors().add(author1);
-        book2.getAuthors().add(author1);
-        book3.getAuthors().add(author2);
-
-        author1.getBooks().add(book1);
-        author1.getBooks().add(book2);
-        author2.getBooks().add(book3);
-
-        User user1 =
+        User sunilBora =
                 new User("Sunil", "Bora", "suni.bora@example.com");
-        User user2 =
+        User davidMiller =
                 new User("David", "Miller", "david.miller@example.com");
-        User user3 =
-                new User("David", "Miller", "david.miller@example.com");
-        User user4 =
+        User sanchesMiller =
+                new User("Sanches", "Miller", "david.miller@example.com");
+        User paulSmith =
                 new User("Paul", "Smith", "paul.smith@example.com");
 
         UserService userService = context.getBean(UserService.class);
 
         // Add Users
-        userService.add(user1);
-        userService.add(user2);
-        userService.add(user3);
-        userService.add(user4);
+        userService.add(sunilBora);
+        userService.add(davidMiller);
+        userService.add(sanchesMiller);
+        userService.add(paulSmith);
 
         // Get Users
         List<User> users = userService.listUsers();
@@ -66,9 +58,9 @@ public class MainApp {
         BookService bookService = context.getBean(BookService.class);
 
         // Add Books
-        bookService.add(book1);
-        bookService.add(book2);
-        bookService.add(book3);
+        bookService.add(wiu_wui);
+        bookService.add(piu_piu);
+        bookService.add(shikSki);
 
         // Get Books
         List<Book> books = bookService.listBooks();
@@ -92,8 +84,8 @@ public class MainApp {
         AuthorService authorService = context.getBean(AuthorService.class);
 
         // Add Authors
-        authorService.add(author1);
-        authorService.add(author2);
+        authorService.add(stepanBeep);
+        authorService.add(gorikOmar);
 
         // Get Authors
         List<Author> authors = authorService.listAuthors();
@@ -115,12 +107,12 @@ public class MainApp {
         RentService rentService = context.getBean(RentService.class);
 
         LocalDate localDate = LocalDate.now();
-        Rent rent1 = new Rent(localDate, user1, book1, true);
-        Rent rent2 = new Rent(localDate, user2, book3, true);
+        Rent sunilBoraRent = new Rent(localDate, sunilBora, piu_piu);
+        Rent davidMillerRent = new Rent(localDate, davidMiller, shikSki);
 
         // Add Rents
-        rentService.add(rent1);
-        rentService.add(rent2);
+        rentService.add(sunilBoraRent);
+        rentService.add(davidMillerRent);
 
         // Get Rents
         List<Rent> rents = rentService.listRents();

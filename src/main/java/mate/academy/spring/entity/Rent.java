@@ -35,11 +35,11 @@ public class Rent {
     public Rent() {
     }
 
-    public Rent(LocalDate rentDate, User user, Book book, boolean active) {
+    public Rent(LocalDate rentDate, User user, Book book) {
         this.rentDate = rentDate;
         this.user = user;
         this.book = book;
-        this.active = active;
+        this.active = true;
     }
 
     public Long getId() {

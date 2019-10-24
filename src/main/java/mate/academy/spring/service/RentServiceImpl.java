@@ -16,9 +16,6 @@ public class RentServiceImpl implements RentService {
     @Autowired
     private RentDao rentDao;
 
-    @Autowired
-    private RentDao rentDao;
-
     @Transactional
     @Override
     public void add(Rent rent) {
@@ -29,12 +26,6 @@ public class RentServiceImpl implements RentService {
     @Override
     public List<Rent> listRents() {
         return rentDao.listRents();
-    }
-
-    @Transactional
-    @Override
-    public Rent rentBook(User user, Book book) {
-        return rentDao.rentBook(user, book);
     }
 
     @Transactional
@@ -55,6 +46,7 @@ public class RentServiceImpl implements RentService {
         return rentDao.getBooksRentedByUser(user);
     }
 
+    @Transactional
     @Override
     public Rent rentBook(User user, Book book) {
         Rent rent = new Rent(LocalDate.now(),user,book);

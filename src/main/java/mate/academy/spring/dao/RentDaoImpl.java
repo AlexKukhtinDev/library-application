@@ -30,7 +30,7 @@ public class RentDaoImpl implements RentDao {
 
     @Override
     public Rent rentBook(User user, Book book) {
-        Rent rent = new Rent(LocalDate.now(),user, book);
+        Rent rent = new Rent(LocalDate.now(), user, book);
         sessionFactory.getCurrentSession().save(rent);
         return rent;
     }
@@ -59,6 +59,5 @@ public class RentDaoImpl implements RentDao {
         query.setParameter("user_id", user.getId());
         return query.getResultList();
     }
-        return null;
-    }
 }
+

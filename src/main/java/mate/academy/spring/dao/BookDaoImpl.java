@@ -36,10 +36,8 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public Book getById(Long id) {
-        TypedQuery<Book> query = sessionFactory.getCurrentSession().createQuery(
-                "FROM Book WHERE id = :id", Book.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+        Book book = sessionFactory.getCurrentSession().get(Book.class,id);
+        return book;
     }
 
     @Override

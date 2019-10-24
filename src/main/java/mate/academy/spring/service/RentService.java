@@ -18,5 +18,4 @@ public interface RentService {
 
     List<Book> getBooksRentedByUser(User user);
 
-
 }

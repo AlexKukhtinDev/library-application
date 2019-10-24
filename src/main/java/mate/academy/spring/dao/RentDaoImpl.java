@@ -26,7 +26,4 @@ public class RentDaoImpl implements RentDao {
                 .createQuery("FROM Rent", Rent.class);
         return query.getResultList();
     }
-
-
-
 }

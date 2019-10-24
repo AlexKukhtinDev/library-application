@@ -12,7 +12,9 @@ import mate.academy.spring.entity.Rent;
 import mate.academy.spring.entity.User;
 import mate.academy.spring.service.AuthorService;
 import mate.academy.spring.service.BookService;
+
 import mate.academy.spring.service.LibraryService;
+
 import mate.academy.spring.service.RentService;
 import mate.academy.spring.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -97,6 +99,23 @@ public class MainApp {
             System.out.println();
         }
 
+        }
+
+        AuthorService authorService = context.getBean(AuthorService.class);
+
+        // Add Authors
+        authorService.add(stepanBeep);
+        authorService.add(gorikOmar);
+
+        // Get Authors
+        List<Author> authors = authorService.listAuthors();
+        for (Author author : authors) {
+            System.out.println("Id = " + author.getId());
+            System.out.println("Title = " + author.getName());
+            System.out.println("Year = " + author.getSurname());
+            System.out.println();
+        }
+
         List<Author> authorByName = authorService.findByName("Gorik");
         for (Author author : authorByName) {
             System.out.println("Id = " + author.getId());
@@ -133,6 +152,7 @@ public class MainApp {
             System.out.println("Price = " + book.getPrice());
             System.out.println();
         }
+=======
 
         context.close();
     }

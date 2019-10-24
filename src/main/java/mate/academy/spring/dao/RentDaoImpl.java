@@ -27,9 +27,6 @@ public class RentDaoImpl implements RentDao {
         return query.getResultList();
     }
 
-    @Override
-    public Rent rentBook(User user, Book book) {
-        return null;
-    }
+
 
 }

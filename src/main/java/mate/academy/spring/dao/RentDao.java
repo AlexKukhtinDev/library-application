@@ -11,5 +11,4 @@ public interface RentDao {
 
     List<Rent> listRents();
 
-    Rent rentBook(User user, Book book);
 }

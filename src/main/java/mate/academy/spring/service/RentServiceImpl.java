@@ -27,10 +27,4 @@ public class RentServiceImpl implements RentService {
         return rentDao.listRents();
     }
 
-    @Override
-    public Rent rentBook(User user, Book book) {
-        Rent rent = new Rent(LocalDate.now(),user,book);
-        rentDao.add(rent);
-        return rent;
-    }
 }

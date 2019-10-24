@@ -14,8 +14,9 @@ public class BookDaoImpl implements BookDao {
     private SessionFactory sessionFactory;
 
     @Override
-    public void add(Book book) {
+    public Book add(Book book) {
         sessionFactory.getCurrentSession().save(book);
+        return book;
     }
 
     @Override
@@ -30,6 +31,22 @@ public class BookDaoImpl implements BookDao {
         TypedQuery<Book> query = sessionFactory.getCurrentSession()
                 .createQuery("FROM Book WHERE title LIKE CONCAT('%', :title, '%')", Book.class);
         query.setParameter("title", title);
+        return query.getResultList();
+    }
+
+    @Override
+    public Book getById(Long id) {
+        TypedQuery<Book> query = sessionFactory.getCurrentSession().createQuery(
+                "FROM Book WHERE id = :id", Book.class);
+        query.setParameter("id", id);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public List<Book> findByName(String name) {
+        TypedQuery<Book> query = sessionFactory.getCurrentSession().createQuery(
+                "FROM Book WHERE name LIKE CONCAT('%', :name, '%')", Book.class);
+        query.setParameter("name", name);
         return query.getResultList();
     }
 }

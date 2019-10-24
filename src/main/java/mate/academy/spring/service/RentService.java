@@ -10,6 +10,7 @@ public interface RentService {
     void add (Rent rent);
 
     List<Rent> listRents();
+  
     Rent rentBook(User user, Book book);
 
     Rent getRent(User user, Book book);
@@ -18,5 +19,7 @@ public interface RentService {
 
     List<Book> getBooksRentedByUser(User user);
 
+    Rent rentBook(User user, Book book);
 
+    List<Rent> listRents();
 }

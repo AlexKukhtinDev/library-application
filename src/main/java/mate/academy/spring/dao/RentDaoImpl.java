@@ -59,4 +59,6 @@ public class RentDaoImpl implements RentDao {
         query.setParameter("user_id", user.getId());
         return query.getResultList();
     }
+        return null;
+    }
 }

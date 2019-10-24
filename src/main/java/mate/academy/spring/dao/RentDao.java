@@ -19,5 +19,4 @@ public interface RentDao {
     void returnBook(Rent rent);
 
     List<Book> getBooksRentedByUser(User user);
-
 }

@@ -16,11 +16,16 @@ public class RentServiceImpl implements RentService {
     @Autowired
     private RentDao rentDao;
 
+    @Autowired
+    private RentDao rentDao;
+
+    @Transactional
     @Override
     public void add(Rent rent) {
     rentDao.add(rent);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Rent> listRents() {
         return rentDao.listRents();
@@ -50,4 +55,10 @@ public class RentServiceImpl implements RentService {
         return rentDao.getBooksRentedByUser(user);
     }
 
+    @Override
+    public Rent rentBook(User user, Book book) {
+        Rent rent = new Rent(LocalDate.now(),user,book);
+        rentDao.add(rent);
+        return rent;
+    }
 }

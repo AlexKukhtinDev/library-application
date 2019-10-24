@@ -2,7 +2,7 @@ package mate.academy.spring.controller;
 
 import mate.academy.spring.entity.Rent;
 import mate.academy.spring.service.BookService;
-import mate.academy.spring.service.LibraryService;
+import mate.academy.spring.service.RentService;
 import mate.academy.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,27 +21,27 @@ public class RentController {
     @Autowired
     private BookService bookService;
     @Autowired
-    private LibraryService libraryService;
+    private RentService rentService;
 
     @GetMapping("/rentBook")
     public String rentBook(@RequestParam("book_id") Long id, ModelMap model) {
-        model.put("book", libraryService.rentBook(userService.getById(USER_ID),
+        model.put("book", rentService.rentBook(userService.getById(USER_ID),
                 bookService.getById(id)));
         return "forward:/book";
     }
 
     @GetMapping("/returnBook")
     public String returnBook(@RequestParam("book_id") Long id) {
-        Rent rent = libraryService.getRent(userService.getById(USER_ID),
+        Rent rent = rentService.getRent(userService.getById(USER_ID),
                 bookService.getById(id));
-        libraryService.returnBook(rent);
+        rentService.returnBook(rent);
         return "forward:/book";
     }
 
     @GetMapping("/rentedBooks")
     public String getBooksRentedByUser(ModelMap model) {
         model.addAttribute("books",
-                libraryService.getBooksRentedByUser(userService.getById(USER_ID)));
+                rentService.getBooksRentedByUser(userService.getById(USER_ID)));
         return "usersRentedBooks";
     }
 }

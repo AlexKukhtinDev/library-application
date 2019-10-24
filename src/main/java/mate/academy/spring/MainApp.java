@@ -12,7 +12,6 @@ import mate.academy.spring.entity.Rent;
 import mate.academy.spring.entity.User;
 import mate.academy.spring.service.AuthorService;
 import mate.academy.spring.service.BookService;
-import mate.academy.spring.service.LibraryService;
 import mate.academy.spring.service.RentService;
 import mate.academy.spring.service.UserService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -122,15 +121,6 @@ public class MainApp {
             System.out.println("Date = " + rent.getRentDate());
             System.out.println("Title = " + rent.getBook().getTitle());
             System.out.println("User name = " + rent.getUser().getFirstName());
-            System.out.println();
-        }
-        LibraryService libraryService = context.getBean(LibraryService.class);
-        List<Book> bookss = libraryService.getBooksRentedByUser(sunilBora);
-        for (Book book: bookss) {
-            System.out.println("Id = " + book.getBookId());
-            System.out.println("Title = " + book.getTitle());
-            System.out.println("Year = " + book.getYear());
-            System.out.println("Price = " + book.getPrice());
             System.out.println();
         }
 

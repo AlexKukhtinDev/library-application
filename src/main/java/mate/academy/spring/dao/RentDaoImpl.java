@@ -1,5 +1,6 @@
 package mate.academy.spring.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 import javax.persistence.TypedQuery;
 
@@ -27,6 +28,35 @@ public class RentDaoImpl implements RentDao {
         return query.getResultList();
     }
 
+    @Override
+    public Rent rentBook(User user, Book book) {
+        Rent rent = new Rent(LocalDate.now(),user, book);
+        sessionFactory.getCurrentSession().save(rent);
+        return rent;
+    }
 
+    @Override
+    public Rent getRent(User user, Book book) {
+        TypedQuery<Rent> query = sessionFactory.getCurrentSession()
+                .createQuery("FROM Rent WHERE user.id = :userId " +
+                        "AND book.id = :bookId", Rent.class);
+        query.setParameter("userId", user.getId());
+        query.setParameter("bookId", book.getBookId());
+        return query.getSingleResult();
+    }
 
+    @Override
+    public void returnBook(Rent rent) {
+        rent.setActive(false);
+        sessionFactory.getCurrentSession().update(rent);
+    }
+
+    @Override
+    public List<Book> getBooksRentedByUser(User user) {
+        TypedQuery<Book> query = sessionFactory.getCurrentSession()
+                .createQuery("select book from Rent where user_id = :user_id and active = true",
+                        Book.class);
+        query.setParameter("user_id", user.getId());
+        return query.getResultList();
+    }
 }

@@ -12,19 +12,42 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RentServiceImpl implements RentService {
+
     @Autowired
     private RentDao rentDao;
 
-    @Transactional
     @Override
     public void add(Rent rent) {
     rentDao.add(rent);
     }
 
-    @Transactional(readOnly = true)
     @Override
     public List<Rent> listRents() {
         return rentDao.listRents();
+    }
+
+    @Transactional
+    @Override
+    public Rent rentBook(User user, Book book) {
+        return rentDao.rentBook(user, book);
+    }
+
+    @Transactional
+    @Override
+    public Rent getRent(User user, Book book) {
+        return rentDao.getRent(user, book);
+    }
+
+    @Transactional
+    @Override
+    public void returnBook(Rent rent) {
+        rentDao.returnBook(rent);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Book> getBooksRentedByUser(User user) {
+        return rentDao.getBooksRentedByUser(user);
     }
 
 }

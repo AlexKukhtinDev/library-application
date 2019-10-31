@@ -16,24 +16,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "authors")
 public class Author {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "author_id")
-    private Long id;
+    private Long authorId;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "surname")
     private String surname;
-    @ManyToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "authors_books",
             joinColumns = @JoinColumn(name = "author_id", referencedColumnName = "author_id"),
             inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "book_id"))
     private List<Book> books;
 
     public Author() {
-
     }
 
     public Author(String name, String surname, List<Book> books) {
@@ -42,12 +42,12 @@ public class Author {
         this.books = books;
     }
 
-    public Long getId() {
-        return id;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
     public String getName() {

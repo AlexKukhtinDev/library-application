@@ -1,8 +1,10 @@
 package mate.academy.spring.entity;
 
 import java.time.LocalDate;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,11 +37,11 @@ public class Rent {
     public Rent() {
     }
 
-    public Rent(LocalDate rentDate, User user, Book book) {
+    public Rent(LocalDate rentDate, User user, Book book, boolean active) {
         this.rentDate = rentDate;
         this.user = user;
         this.book = book;
-        this.active = true;
+        this.active = active;
     }
 
     public Long getId() {

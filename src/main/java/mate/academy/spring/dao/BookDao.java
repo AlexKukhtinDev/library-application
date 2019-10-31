@@ -1,17 +1,17 @@
 package mate.academy.spring.dao;
 
 import java.util.List;
+import java.util.Optional;
+
 import mate.academy.spring.entity.Book;
 
 public interface BookDao {
-  
-    Book add(Book book);
+
+    void add(Book book);
+
+    Optional<Book> get(Long id);
 
     List<Book> listBooks();
 
     List<Book> findByTitle(String title);
-
-    Book getById(Long id);
-
-    List<Book> findByName(String name);
 }

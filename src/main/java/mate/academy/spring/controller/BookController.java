@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/book")
 public class BookController {
@@ -20,25 +22,30 @@ public class BookController {
 
     @GetMapping
     public String getAllBooks(ModelMap model) {
-        model.put("books", bookService.listBooks());
+        model.put("allBooks", bookService.listBooks());
         return "allBooks";
     }
 
-    @GetMapping("/{bookId}")
-    public String bookInfo(@PathVariable("bookId") Long id, ModelMap model) {
-        model.put("book", bookService.getById(id));
-        return "info";
+    @GetMapping("/{id}")
+    public String bookInfo(@PathVariable Long id, ModelMap model) {
+        model.put("book", bookService.get(id));
+        return "bookInfo";
     }
 
     @GetMapping("/find")
-    public String findBook(@RequestParam("title") String name, ModelMap model) {
-        model.put("books", bookService.findByName(name));
+    public String findBook(@RequestParam("title") String title, ModelMap model) {
+        model.put("allBooks", bookService.findByTitle(title));
         return "allBooks";
     }
 
     @PostMapping("/add")
-    public String addBook(@ModelAttribute Book book, ModelMap model) {
-        model.put("book", bookService.add(book));
+    public String add(@ModelAttribute Book book, ModelMap model) {
+        bookService.add(book);
         return getAllBooks(model);
+    }
+
+    @GetMapping("/add")
+    public String addBookPage() {
+        return "createBook";
     }
 }

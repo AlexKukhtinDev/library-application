@@ -1,9 +1,10 @@
-package mate.academy.spring.service;
+package mate.academy.spring.service.impl;
 
 import java.util.List;
-
+import java.util.Optional;
 import mate.academy.spring.dao.UserDao;
 import mate.academy.spring.entity.User;
+import mate.academy.spring.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,16 +21,28 @@ public class UserServiceImp implements UserService {
         userDao.add(user);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     @Override
-    public User getById(Long id) {
-        return userDao.getById(id);
+    public Optional<User> get(Long id) {
+        return userDao.get(id);
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<User> listUsers() {
         return userDao.listUsers();
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return userDao.findByUsername(username);
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userDao.findByEmail(email);
     }
 
 }
